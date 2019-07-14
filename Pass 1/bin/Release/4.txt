@@ -1,0 +1,52 @@
+.23456789012345678901234567890123456
+program  start   0
+         LDx     #1
+         LDT     #1
+BIG      RMO     a,s
+         comp    #0
+         jEQ     fin
+         ldt     #0
+loop     LDX     #0
+         RMO     x,a
+         comp    #7
+         jeq     big
+         LDCH    str,x
+         STCH    cmp1
+         RMO     f,a
+         ADD     #1
+         RMO     a,x
+         LDCH    str,x 
+         STCH    cmp2
+         RMO     a,s
+         LDCH    cmp1
+         compr   a,s
+         JGT     swap
+         j       loop
+swap     LDCH    cmp1
+         stch    str,x
+         RMO     x,a
+         sub     #1
+         RMO     a,x
+         ldch    cmp2 
+         stch    str,x
+         +ldt    #1 
+         j       loop
+fin      ldx     #0
+loop2    TD      out
+         JEQ     loop2
+         ldch    str,x
+         wd      OUT
+         tix     #8
+         jlt     loop2
+         j       *       
+str      byte    c'hgfedcba'
+         org     str
+str2      equ    =5 
+array    RESB    8
+cmp1     RESB    1
+cmp2     RESB    1
+temp     RESB    1000
+out      byte    X'04'
+         end 
+
+             

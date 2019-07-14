@@ -1,0 +1,65 @@
+line no.     Address  Label    Mnem.   Operands Comments
+1            00000000 .23456789012345678901234567890123456
+2            00000000 PROGRAM  START   0
+3            00000000          LDX     #1
+4            00000003          LDT     #1
+5            00000006 BIG      RMO     A,S
+6            00000008          COMP    #0
+7            0000000b          JEQ     FIN
+8            0000000e          LDT     #0
+9            00000011 LOOP     LDX     #0
+10           00000014          RMO     X,A
+11           00000016          COMP    #7
+12           00000019          JEQ     BIG
+13           0000001c          LDCH    STR,X
+14           0000001f          STCH    CMP1
+15           00000022          RMO     F,A
+16           00000024          ADD     #1
+17           00000027          RMO     A,X
+18           00000029          LDCH    STR,X 
+19           0000002c          STCH    CMP2
+20           0000002f          RMO     A,S
+21           00000031          LDCH    CMP1
+22           00000034          COMPR   A,S
+23           00000036          JGT     SWAP
+24           00000039          J       LOOP
+25           0000003c SWAP     LDCH    CMP1
+26           0000003f          STCH    STR,X
+27           00000042          RMO     X,A
+28           00000044          SUB     #1
+29           00000047          RMO     A,X
+30           00000049          LDCH    CMP2 
+31           0000004c          STCH    STR,X
+32           0000004f          +LDT    #1 
+33           00000053          J       LOOP
+34           00000056 FIN      LDX     #0
+35           00000059 LOOP2    TD      OUT
+36           0000005c          JEQ     LOOP2
+37           0000005f          LDCH    STR,X
+38           00000062          WD      OUT
+39           00000065          TIX     #8
+40           00000068          JLT     LOOP2
+41           0000006b          J       *       
+42           0000006e STR      BYTE    C'HGFEDCBA'
+43           00000076          ORG     STR
+44           00000076 STR2      EQU    =5 
+45           00000076 ARRAY    RESB    8
+46           0000007e CMP1     RESB    1
+47           0000007f CMP2     RESB    1
+48           00000080 TEMP     RESB    1000
+49           00000468 OUT      BYTE    X'04'
+50           00000469          END 
+     e n d     p h a s e 1 
+  s y m b o l     t a b l e   (values in decimal) 
+BIG 6 Relocatable.
+LOOP 17 Relocatable.
+SWAP 60 Relocatable.
+FIN 86 Relocatable.
+LOOP2 89 Relocatable.
+STR 110 Relocatable.
+STR2 5 Absolute.
+ARRAY 118 Relocatable.
+CMP1 126 Relocatable.
+CMP2 127 Relocatable.
+TEMP 128 Relocatable.
+OUT 1128 Relocatable.
